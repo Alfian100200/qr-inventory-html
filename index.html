@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kartu Idul Fitri 🌙</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(160deg,#072a1f,#0f5132);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+/* SKY */
+
+.sky{
+position:fixed;
+width:100%;
+height:100%;
+z-index:1;
+}
+
+/* STARS */
+
+.star{
+position:absolute;
+color:#ffd166;
+font-size:14px;
+animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+0%{opacity:0.3}
+50%{opacity:1}
+100%{opacity:0.3}
+}
+
+/* MOON */
+
+.moon{
+position:absolute;
+top:80px;
+right:120px;
+width:110px;
+height:110px;
+background:#fff3b0;
+border-radius:50%;
+box-shadow:0 0 70px rgba(255,240,160,0.9);
+animation:moonMove 8s ease-in-out infinite;
+z-index:2;
+}
+
+@keyframes moonMove{
+0%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+100%{transform:translateY(0)}
+}
+
+/* MOSQUE */
+
+.mosque{
+position:fixed;
+bottom:0;
+width:100%;
+height:180px;
+background:#041f13;
+clip-path:polygon(
+0% 100%,0% 70%,10% 60%,20% 70%,30% 50%,40% 70%,50% 60%,60% 70%,70% 55%,80% 70%,90% 60%,100% 70%,100% 100%
+);
+z-index:2;
+}
+
+/* CONTAINER */
+
+.container{
+position:relative;
+z-index:5;
+}
+
+/* ENVELOPE */
+
+.envelope{
+width:320px;
+height:200px;
+background:white;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:0 15px 35px rgba(0,0,0,0.4);
+transition:0.4s;
+}
+
+.envelope:hover{
+transform:scale(1.05);
+}
+
+/* CARD */
+
+.card{
+display:none;
+background:white;
+width:420px;
+padding:40px;
+border-radius:18px;
+box-shadow:0 15px 45px rgba(0,0,0,0.4);
+text-align:center;
+animation:fadeCard 0.7s ease;
+}
+
+@keyframes fadeCard{
+from{
+opacity:0;
+transform:scale(0.9);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+h1{
+font-size:32px;
+background:linear-gradient(45deg,#bfa13a,#f7e7a9);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+}
+
+p{
+color:#1b4332;
+margin-bottom:12px;
+line-height:1.6;
+}
+
+/* BUTTON */
+
+button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:#198754;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* NOTE */
+
+.note{
+margin-top:20px;
+padding:12px;
+background:#e9f5ec;
+border-radius:10px;
+font-size:14px;
+color:#1b4332;
+}
+
+/* FOOTER */
+
+footer{
+position:fixed;
+bottom:10px;
+width:100%;
+text-align:center;
+font-size:12px;
+color:#d4f4dd;
+z-index:5;
+}
+
+/* CONFETTI */
+
+@keyframes fall{
+0%{transform:translateY(-20px);opacity:1;}
+100%{transform:translateY(100vh);opacity:0;}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sky"></div>
+<div class="moon"></div>
+<div class="mosque"></div>
+
+<div class="container">
+
+<div id="envelope" class="envelope" onclick="openCard()">
+📩 Buka Kartu Idul Fitri
+</div>
+
+<div id="card" class="card">
+
+<h1 id="title">Selamat Idul Fitri 🌙</h1>
+
+<p id="msg1">Taqabbalallahu minna wa minkum.</p>
+
+<p id="msg2">
+Semoga di hari kemenangan ini hati kita kembali bersih,
+langkah kita dipenuhi keberkahan,
+dan kebahagiaan selalu menyertai.
+</p>
+
+<p id="msg3">Mohon maaf lahir dan batin.</p>
+
+<button onclick="finish()">Aamiin</button>
+
+<div class="note">
+📸 Screenshot ucapan ini dan kirimkan ke orang tersayang.
+</div>
+
+</div>
+
+</div>
+
+<footer>Create by Alfian Firdaus</footer>
+
+<audio id="takbir" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4e0a6e9c62.mp3">
+</audio>
+
+<script>
+
+/* STARS */
+
+let sky=document.querySelector(".sky")
+
+for(let i=0;i<70;i++){
+
+let star=document.createElement("div")
+star.className="star"
+star.innerHTML="✦"
+
+star.style.left=Math.random()*100+"vw"
+star.style.top=Math.random()*100+"vh"
+
+sky.appendChild(star)
+
+}
+
+/* OPEN CARD */
+
+function openCard(){
+
+document.getElementById("envelope").style.display="none"
+document.getElementById("card").style.display="block"
+
+document.getElementById("takbir").play()
+
+}
+
+/* CONFETTI */
+
+function finish(){
+
+for(let i=0;i<40;i++){
+
+let conf=document.createElement("div")
+
+conf.innerHTML="✨"
+
+conf.style.position="fixed"
+conf.style.left=Math.random()*100+"vw"
+conf.style.top="-20px"
+conf.style.fontSize="20px"
+conf.style.animation="fall 4s linear"
+
+document.body.appendChild(conf)
+
+setTimeout(()=>conf.remove(),4000)
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
